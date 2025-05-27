@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datannabis - Datos Científicos sobre Cannabis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #3A5F0B 0%, #8BC34A 100%);
+        }
+        
+        .leaf-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233A5F0B' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .team-member:hover .team-overlay {
+            opacity: 1;
+        }
+        
+        .team-overlay {
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(58, 95, 11, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(58, 95, 11, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(58, 95, 11, 0);
+            }
+        }
+        
+        /* Custom color palette */
+        .bg-cannabis-50 {
+            background-color: #f1f8e9;
+        }
+        .bg-cannabis-100 {
+            background-color: #dcedc8;
+        }
+        .bg-cannabis-200 {
+            background-color: #c5e1a5;
+        }
+        .bg-cannabis-300 {
+            background-color: #aed581;
+        }
+        .bg-cannabis-400 {
+            background-color: #9ccc65;
+        }
+        .bg-cannabis-500 {
+            background-color: #8bc34a;
+        }
+        .bg-cannabis-600 {
+            background-color: #7cb342;
+        }
+        .bg-cannabis-700 {
+            background-color: #689f38;
+        }
+        .bg-cannabis-800 {
+            background-color: #558b2f;
+        }
+        .bg-cannabis-900 {
+            background-color: #3A5F0B;
+        }
+        
+        .text-cannabis-50 {
+            color: #318058;
+        }
+        .text-cannabis-100 {
+            color: #495041;
+        }
+        .text-cannabis-200 {
+            color: #c5e1a5;
+        }
+        .text-cannabis-300 {
+            color: #aed581;
+        }
+        .text-cannabis-400 {
+            color: #9ccc65;
+        }
+        .text-cannabis-500 {
+            color: #8bc34a;
+        }
+        .text-cannabis-600 {
+            color: #7cb342;
+        }
+        .text-cannabis-700 {
+            color: #689f38;
+        }
+        .text-cannabis-800 {
+            color: #558b2f;
+        }
+        .text-cannabis-900 {
+            color: #3A5F0B;
+        }
+        
+        /* Pink accents */
+        .bg-pink-accent {
+            background-color: #FF80AB;
+        }
+        .text-pink-accent {
+            color: #FF80AB;
+        }
+        .border-pink-accent {
+            border-color: #FF80AB;
+        }
+        
+        .hover-bg-pink-accent:hover {
+            background-color: #FF80AB;
+        }
+        .hover-text-pink-accent:hover {
+            color: #FF80AB;
+        }
+
+        /* Gallery styles */
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item img {
+            transition: transform 0.5s ease;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+            color: white;
+            padding: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        /* Lightbox styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 0.5rem;
+        }
+
+        .lightbox-caption {
+            color: white;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .close-lightbox {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .lightbox-nav button {
+            background: rgba(255,255,255,0.3);
+            color: white;
+            border: none;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox-nav button:hover {
+            background: rgba(255,255,255,0.5);
+        }
+
+        /* Tab system */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .tab-button {
+            transition: all 0.3s ease;
+        }
+
+        .tab-button.active {
+            background-color: #8bc34a;
+            color: white;
+        }
+
+        /* Accordion styles */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .accordion-toggle:checked + .accordion-label + .accordion-content {
+            max-height: 1000px;
+        }
+
+        .accordion-label {
+            cursor: pointer;
+            display: block;
+        }
+
+        /* Legal status indicator */
+        .legal-status {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 6px;
+        }
+
+        .legal-status.legal {
+            background-color: #4CAF50;
+        }
+
+        .legal-status.decriminalized {
+            background-color: #8BC34A;
+        }
+
+        .legal-status.illegal {
+            background-color: #F44336;
+        }
+
+        /* Strain card */
+        .strain-card {
+            transition: all 0.3s ease;
+        }
+
+        .strain-card:hover {
+            transform: scale(1.03);
+        }
+
+        /* Timeline */
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background-color: #8bc34a;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -0.5rem;
+            top: 0;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background-color: #8bc34a;
+        }
+
+        /* Forum post */
+        .forum-post {
+            transition: all 0.3s ease;
+        }
+
+        .forum-post:hover {
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center">
+                        <i class="fas fa-cannabis text-cannabis-600 text-2xl mr-2"></i>
+                        <span class="font-bold text-xl text-cannabis-800">DataNnabis</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#inicio" class="text-gray-700 hover:text-pink-accent transition">Inicio</a>
+                    <a href="#noticias" class="text-gray-700 hover:text-pink-accent transition">Noticias</a>
+                    <a href="#investigaciones" class="text-gray-700 hover:text-pink-accent transition">Investigaciones</a>
+                    <a href="#legislacion" class="text-gray-700 hover:text-pink-accent transition">Legislación</a>
+                    <a href="#cepas" class="text-gray-700 hover:text-pink-accent transition">Cepas</a>
+                    <a href="#beneficios" class="text-gray-700 hover:text-pink-accent transition">Beneficios</a>
+                    <div class="relative group">
+                        <button class="text-gray-700 hover:text-pink-accent transition flex items-center">
+                            Más <i class="fas fa-chevron-down ml-1 text-sm"></i>
+                        </button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-50 hidden group-hover:block">
+                            <a href="#efectos" class="block px-4 py-2 text-gray-700 hover:bg-cannabis-100">Efectos Secundarios</a>
+                            <a href="#estadisticas" class="block px-4 py-2 text-gray-700 hover:bg-cannabis-100">Estadísticas</a>
+                            <a href="#entrevistas" class="block px-4 py-2 text-gray-700 hover:bg-cannabis-100">Entrevistas</a>
+                            <a href="#recursos" class="block px-4 py-2 text-gray-700 hover:bg-cannabis-100">Recursos</a>
+                            <a href="#eventos" class="block px-4 py-2 text-gray-700 hover:bg-cannabis-100">Eventos</a>
+                            <a href="#faq" class="block px-4 py-2 text-gray-700 hover:bg-cannabis-100">FAQ</a>
+                            <a href="#comunidad" class="block px-4 py-2 text-gray-700 hover:bg-cannabis-100">Comunidad</a>
+                        </div>
+                    </div>
+                    <a href="#receta" class="bg-cannabis-600 hover:bg-cannabis-700 text-white px-4 py-2 rounded-lg transition">Receta Médica</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="menu-btn" class="text-gray-700 focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white pb-4 px-4">
+            <a href="#inicio" class="block py-2 text-gray-700 hover:text-pink-accent transition">Inicio</a>
+            <a href="#noticias" class="block py-2 text-gray-700 hover:text-pink-accent transition">Noticias</a>
+            <a href="#investigaciones" class="block py-2 text-gray-700 hover:text-pink-accent transition">Investigaciones</a>
+            <a href="#legislacion" class="block py-2 text-gray-700 hover:text-pink-accent transition">Legislación</a>
+            <a href="#cepas" class="block py-2 text-gray-700 hover:text-pink-accent transition">Cepas</a>
+            <a href="#beneficios" class="block py-2 text-gray-700 hover:text-pink-accent transition">Beneficios</a>
+            <a href="#efectos" class="block py-2 text-gray-700 hover:text-pink-accent transition">Efectos Secundarios</a>
+            <a href="#estadisticas" class="block py-2 text-gray-700 hover:text-pink-accent transition">Estadísticas</a>
+            <a href="#entrevistas" class="block py-2 text-gray-700 hover:text-pink-accent transition">Entrevistas</a>
+            <a href="#recursos" class="block py-2 text-gray-700 hover:text-pink-accent transition">Recursos</a>
+            <a href="#eventos" class="block py-2 text-gray-700 hover:text-pink-accent transition">Eventos</a>
+            <a href="#faq" class="block py-2 text-gray-700 hover:text-pink-accent transition">FAQ</a>
+            <a href="#comunidad" class="block py-2 text-gray-700 hover:text-pink-accent transition">Comunidad</a>
+            <a href="#receta" class="block py-2 bg-cannabis-600 text-white rounded-lg text-center mt-2">Receta Médica</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero-gradient text-white py-20 leaf-pattern">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-6 text-cannabis-900">
+                        Datos científicos sobre <span class="text-pink-accent">cannabis</span>
+                    </h1>
+                    <p class="text-xl mb-8 text-cannabis-800">
+                        Información verificada, procesada y presentada de manera accesible por expertos en medicina cannabinoide y ciencia de datos.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#datos" class="bg-white text-cannabis-800 hover:bg-pink-accent hover:text-white px-6 py-3 rounded-lg font-semibold transition">Explorar datos</a>
+                        <a href="#equipo" class="border-2 border-white text-white hover:bg-white hover:bg-opacity-10 hover:border-pink-accent px-6 py-3 rounded-lg font-semibold transition">Conoce al equipo</a>
+                        <a href="#receta" class="bg-cannabis-800 hover:bg-cannabis-700 text-white px-6 py-3 rounded-lg font-semibold transition">Receta médica</a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="relative">
+                        <div class="bg-white rounded-xl p-4 shadow-2xl w-64 h-64 flex items-center justify-center">
+                            <i class="fas fa-chart-line text-cannabis-600 text-7xl"></i>
+                        </div>
+                        <div class="absolute -top-6 -left-6 bg-pink-accent rounded-xl p-4 shadow-lg w-32 h-32 flex items-center justify-center">
+                            <i class="fas fa-leaf text-white text-4xl"></i>
+                        </div>
+                        <div class="absolute -bottom-6 -right-6 bg-cannabis-600 rounded-xl p-4 shadow-lg w-32 h-32 flex items-center justify-center">
+                            <i class="fas fa-flask text-white text-4xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="bg-white py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-cannabis-50 rounded-xl p-8 text-center card-hover hover:border-2 hover:border-pink-accent">
+                    <div class="text-cannabis-600 text-5xl mb-4">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2 text-cannabis-800">+1000</h3>
+                    <p class="text-gray-600">Puntos de datos recopilados y verificados</p>
+                </div>
+                <div class="bg-cannabis-50 rounded-xl p-8 text-center card-hover hover:border-2 hover:border-pink-accent">
+                    <div class="text-cannabis-600 text-5xl mb-4">
+                        <i class="fas fa-book-medical"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2 text-cannabis-800">50+</h3>
+                    <p class="text-gray-600">Estudios científicos analizados</p>
+                </div>
+                <div class="bg-cannabis-50 rounded-xl p-8 text-center card-hover hover:border-2 hover:border-pink-accent">
+                    <div class="text-cannabis-600 text-5xl mb-4">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2 text-cannabis-800">2</h3>
+                    <p class="text-gray-600">Expertos trabajando para brindarte información confiable</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section id="noticias" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4 text-cannabis-800">Últimas Noticias</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Mantente informado sobre los últimos desarrollos en el mundo del cannabis medicinal y recreativo.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- News Item 1 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover">
+                    <img src="https://images.unsplash.com/photo-1607962837350-c038188e017f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Cannabis medicinal" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-500 mb-2">
+                            <span>15 Jun 2023</span>
+                            <span class="mx-2">•</span>
+                            <span class="text-pink-accent">Internacional</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-cannabis-800">Alemania avanza hacia la legalización del cannabis recreativo</h3>
+                        <p class="text-gray-600 mb-4">El gobierno alemán presenta un proyecto de ley para regular el consumo adulto de cannabis, convirtiéndose en el primer país europeo en hacerlo.</p>
+                        <a href="#" class="text-pink-accent font-semibold hover:text-cannabis-800 flex items-center">
+                            Leer más <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- News Item 2 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover">
+                    <img src="https://images.unsplash.com/photo-1581375363788-56f3b5670e60?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Investigación cannabis" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-500 mb-2">
+                            <span>10 Jun 2023</span>
+                            <span class="mx-2">•</span>
+                            <span class="text-pink-accent">Nacional</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-cannabis-800">Chile aumenta producción de cannabis medicinal para exportación</h3>
+                        <p class="text-gray-600 mb-4">Empresas chilenas duplican su capacidad productiva ante la creciente demanda internacional de productos medicinales derivados del cannabis.</p>
+                        <a href="#" class="text-pink-accent font-semibold hover:text-cannabis-800 flex items-center">
+                            Leer más <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- News Item 3 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover">
+                    <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" alt="Cannabis y salud" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-500 mb-2">
+                            <span>5 Jun 2023</span>
+                            <span class="mx-2">•</span>
+                            <span class="text-pink-accent">Local</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-cannabis-800">Municipio de Santiago implementa programa piloto con cannabis medicinal</h3>
+                        <p class="text-gray-600 mb-4">El programa beneficiará a pacientes con dolor crónico y epilepsia refractaria, proporcionando tratamiento gratuito con derivados de cannabis.</p>
+                        <a href="#" class="text-pink-accent font-semibold hover:text-cannabis-800 flex items-center">
+                            Leer más <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="inline-block bg-cannabis-800 hover:bg-pink-accent text-white px-6 py-3 rounded-lg font-semibold transition">
+                    <i class="fas fa-newspaper mr-2"></i> Ver más noticias
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest Research Section -->
+    <section id="investigaciones" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4 text-cannabis-800">Últimas Investigaciones</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Los estudios científicos más recientes sobre cannabis y sus aplicaciones.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <!-- Research Item 1 -->
+                <div class="bg-cannabis-50 rounded-xl p-8 card-hover">
+                    <div class="flex items-start mb-4">
+                        <div class="bg-cannabis-100 text-cannabis-800 rounded-lg p-3 mr-4">
+                            <i class="fas fa-brain text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2 text-cannabis-800">Efectos del CBD en trastornos de ansiedad</h3>
+                            <p class="text-sm text-gray-500 mb-2">Publicado en Journal of Clinical Psychiatry • Mayo 2023</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">Estudio doble ciego que demuestra la eficacia del cannabidiol en la reducción de síntomas de ansiedad generalizada, con resultados significativos a las 4 semanas de tratamiento.</p>
+                    <div class="flex justify-between items-center">
+                        <a href="#" class="text-pink-accent font-semibold hover:text-cannabis-800 flex items-center">
+                            Ver estudio <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                        <span class="bg-cannabis-200 text-cannabis-800 text-xs px-3 py-1 rounded-full">Nuevo</span>
+                    </div>
+                </div>
+                
+                <!-- Research Item 2 -->
+                <div class="bg-cannabis-50 rounded-xl p-8 card-hover">
+                    <div class="flex items-start mb-4">
+                        <div class="bg-cannabis-100 text-cannabis-800 rounded-lg p-3 mr-4">
+                            <i class="fas fa-heartbeat text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2 text-cannabis-800">Cannabis y salud cardiovascular</h3>
+                            <p class="text-sm text-gray-500 mb-2">Publicado en European Heart Journal • Abril 2023</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">Meta-análisis que evalúa la relación entre el consumo de cannabis y el riesgo de eventos cardiovasculares, con hallazgos relevantes para pacientes con comorbilidades.</p>
+                    <div class="flex justify-between items-center">
+                        <a href="#" class="text-pink-accent font-semibold hover:text-cannabis-800 flex items-center">
+                            Ver estudio <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                        <span class="bg-cannabis-200 text-cannabis-800 text-xs px-3 py-1 rounded-full">Revisión</span>
+                    </div>
+                </div>
+                
+                <!-- Research Item 3 -->
+                <div class="bg-cannabis-50 rounded-xl p-8 card-hover">
+                    <div class="flex items-start mb-4">
+                        <div class="bg-cannabis-100 text-cannabis-800 rounded-lg p-3 mr-4">
+                            <i class="fas fa-child text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2 text-cannabis-800">Efectos del THC en el desarrollo cerebral adolescente</h3>
+                            <p class="text-sm text-gray-500 mb-2">Publicado en JAMA Pediatrics • Marzo 2023</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">Estudio longitudinal de 5 años que analiza el impacto del consumo temprano de cannabis en el desarrollo cognitivo y la estructura cerebral en adolescentes.</p>
+                    <div class="flex justify-between items-center">
+                        <a href="#" class="text-pink-accent font-semibold hover:text-cannabis-800 flex items-center">
+                            Ver estudio <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                        <span class="bg-cannabis-200 text-cannabis-800 text-xs px-3 py-1 rounded-full">Importante</span>
+                    </div>
+                </div>
+                
+                <!-- Research Item 4 -->
+                <div class="bg-cannabis-50 rounded-xl p-8 card-hover">
+                    <div class="flex items-start mb-4">
+                        <div class="bg-cannabis-100 text-cannabis-800 rounded-lg p-3 mr-4">
+                            <i class="fas fa-pills text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2 text-cannabis-800">Interacciones entre cannabinoides y fármacos convencionales</h3>
+                            <p class="text-sm text-gray-500 mb-2">Publicado en Clinical Pharmacology & Therapeutics • Febrero 2023</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">Investigación que identifica y clasifica las principales interacciones farmacológicas entre cannabinoides y medicamentos de uso común, con implicancias clínicas relevantes.</p>
+                    <div class="flex justify-between items-center">
+                        <a href="#" class="text-pink-accent font-semibold hover:text-cannabis-800 flex items-center">
+                            Ver estudio <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                        <span class="bg-cannabis-200 text-cannabis-800 text-xs px-3 py-1 rounded-full">Guía</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <a href="#" class="inline-block bg-cannabis-800 hover:bg-pink-accent text-white px-6 py-3 rounded-lg font-semibold transition">
+                    <i class="fas fa-book-open mr-2"></i> Ver todas las investigaciones
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Legislation Section -->
+    <section id="legislacion" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4 text-cannabis-800">Legislación y Regulaciones</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Estado actual de las leyes sobre cannabis en Chile y el mundo.</p>
+            </div>
+            
+            <!-- Chile Legal Status -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+                <div class="md:flex">
+                    <div class="md:w-1/3 bg-cannabis-100 p-6 flex flex-col justify-center">
+                        <div class="flex items-center mb-4">
+                            <span class="legal-status legal"></span>
+                            <h3 class="text-xl font-bold text-cannabis-800">Estado en Chile</h3>
+                        </div>
+                        <p class="text-gray-700 mb-4">El cannabis medicinal es legal en Chile desde 2015, mientras que el uso recreativo está despenalizado para consumo personal en espacios privados.</p>
+                        <div class="bg-white rounded-lg p-4">
+                            <h4 class="font-bold text-cannabis-800 mb-2">Resumen legal:</h4>
+                            <ul class="text-sm text-gray-700 space-y-1">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                    <span>Uso medicinal legal con receta</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                    <span>Autocultivo medicinal permitido con autorización</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-exclamation text-yellow-500 mr-2 mt-1"></i>
+                                    <span>Uso recreativo despenalizado (hasta 10g)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-times text-red-500 mr-2 mt-1"></i>
+                                    <span>Venta recreativa ilegal</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="md:w-2/3 p-6">
+                        <h3 class="text-xl font-bold mb-4 text-cannabis-800">Marco legal chileno</h3>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-bold text-cannabis-800 mb-2">Ley 20.000 (2005)</h4>
+                            <p class="text-gray-600">Despenaliza el consumo personal en espacios privados, estableciendo que la tenencia de pequeñas cantidades (hasta 10 gramos) no constituye delito, aunque sigue siendo una falta.</p>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-bold text-cannabis-800 mb-2">Decreto 84 (2015)</h4>
+                            <p class="text-gray-600">Regula el uso medicinal del cannabis, permitiendo la importación de medicamentos derivados y el cultivo controlado para fines terapéuticos con autorización del SAG y el ISP.</p>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-bold text-cannabis-800 mb-2">Proyectos en discusión</h4>
+                            <p class="text-gray-600">Actualmente se debate en el Congreso una modificación a la Ley 20.000 que busca regular completamente el cannabis recreativo, siguiendo modelos como el de Uruguay y Canadá.</p>
+                        </div>
+                        
+                        <a href="#" class="inline-block bg-cannabis-800 hover:bg-pink-accent text-white px-4 py-2 rounded-lg text-sm font-semibold transition">
+                            <i class="fas fa-file-alt mr-2"></i> Ver texto completo de las leyes
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- International Comparison -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-6 text-cannabis-800">Comparación Internacional</h3>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-cannabis-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-cannabis-800 uppercase tracking-wider">País</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-cannabis-800 uppercase tracking-wider">Estado</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-cannabis-800 uppercase tracking-wider">Medicinal</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-cannabis-800 uppercase tracking-wider">Recreativo</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-cannabis-800 uppercase tracking-wider">Autocultivo</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Uruguay</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <span class="legal-status legal"></span> Legal
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Sí</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Sí (registro)</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">6 plantas</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Canadá</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <span class="legal-status legal"></span> Legal
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Sí</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Sí (+18)</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">4 plantas</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Portugal</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <span class="legal-status decriminalized"></span> Despenalizado
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Sí</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">No (no es delito)</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">No</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Estados Unidos</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <span class="legal-status decriminalized"></span> Estatal
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">36 estados</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">19 estados</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Varía</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Países Bajos</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <span class="legal-status decriminalized"></span> Tolerado
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Sí</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">En coffeeshops</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">No</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <a href="#" class="inline-block bg-cannabis-800 hover:bg-pink-accent text-white px-4 py-2 rounded-lg text-sm font-semibold transition">
+                            <i class="fas fa-globe-americas mr-2"></i> Ver legislación completa por países
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Strains Guide Section -->
+    <section id="cepas" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4 text-cannabis-800">Guía de Cepas y Variedades</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Conoce las principales variedades de cannabis y sus características.</p>
+            </div>
+            
+            <!-- Strain Types Tabs -->
+            <div class="mb-8">
+                <div class="flex flex-wrap border-b border-gray-200">
+                    <button class="tab-button active px-4 py-2 font-medium text-sm rounded-t-lg mr-2 mb-2" data-tab="sativas">
+                        <i class="fas fa-sun mr-2"></i>Sativas
+                    </button>
+                    <button class="tab-button px-4 py-2 font-medium text-sm rounded-t-lg mr-2 mb-2" data-tab="indicas">
+                        <i class="fas fa-moon mr-2"></i>Indicas
+                    </button>
+                    <button class="tab-button px-4 py-2 font-medium text-sm rounded-t-lg mr-2 mb-2" data-tab="hibridas">
+                        <i class="fas fa-dna mr-2"></i>Híbridas
+                    </button>
+                    <button class="tab-button px-4 py-2 font-medium text-sm rounded-t-lg mr-2 mb-2" data-tab="alto-cbd">
+                        <i class="fas fa-leaf mr-2"></i>Alto CBD
+                    </button>
+                </div>
+                
+                <!-- Tab Content -->
+                <div class="tab-content active" id="sativas">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                        <!-- Strain Card 1 -->
+                        <div class="bg-cannabis-50 rounded-xl p-6 strain-card">
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="text-xl font-bold text-cannabis-800">Sour Diesel</h3>
+                                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Sativa 90%</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-500 mb-4">
+                                <span class="mr-3">THC: 18-25%</span>
+                                <span>CBD: <1%</span>
+                            </div>
+                            <p class="text-gray-600 mb-4">Energizante y cerebral, ideal para el día. Aroma a combustible con toques cítricos.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-cannabis-100 text-cannabis-800 text-xs px-2 py-1 rounded">Energizante</span>
+                                <span class="bg-cannabis-100 text-cannabis-800 text-xs px-2 py-1 rounded">Creatividad</span>
+                                <span class="bg-cannabis-100 text-cannabis-800 text-xs px-2 py-1 rounded">Estrés</span>
+                            </div>
+                            <a href="#" class="text-pink-accent font-semibold text-sm hover:text-cannabis-800 flex items-center">
+                                Ver detalles <i class="fas fa-chevron-right ml-2 text-xs"></i>
+                            </a>
+                        </div>
+                        
+                        <!-- Strain Card 2 -->
+                        <div class="bg-cannabis-50 rounded-xl p-6 strain-card">
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="text-xl font-bold text-cannabis-800">Jack Herer</h3>
+                                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Sativa 70%</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-500 mb-4">
+                                <span class="mr-3">THC: 15-20%</span>
+                                <span>CBD: 1-2%</span>
+                            </div>
+                            <p class="text-gray-600 mb-4">Clásica variedad que combina claridad mental con relajación corporal. Aroma a pino y especias.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-cannabis-100 text-cannabis-800 text-xs px-2 py-1 rounded">Enfoque</span>
+                                <span class="bg-cannabis-100 text-cannabis-800 text-xs px-2 py-1 rounded">Euforia</span>
+                                <span class="bg-cannabis-100 text-cannabis-800 text-xs px-2 py-1 rounded">Dolor</span>
+                            </div>
+                            <a href="#" class="text-pink-accent font-semibold text-sm hover:text-cannabis-800 flex items-center">
+                                Ver detalles <i class="fas fa-chevron-right ml-2 text-xs"></i>
+                            </a>
+                        </div>
+                        
+                        <!-- Strain Card 3 -->
+                        <div class="bg-cannabis-50 rounded-xl p-6 strain-card">
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="text-xl font-bold text-cannabis-800">Green Crack</h3>
+                                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Sativa 85%</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-500 mb-4">
+                                <span class="mr-3">THC: 15-22%</span>
+                                <span>CBD: <1%</span>
+                            </div>
+                            <p class="text-gray-600 mb-4">Energía pura con sabor tropical. Perfecta para mantenerse productivo y activo.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-cannabis-100 text-cannabis-800 text-xs px-2 py-1 rounded">Energía</span>
+                                <span class="bg-cannabis-100 text-cannabis-800 text-xs px-2 py-1 rounded">Motivación</span>
+                                <span class="bg-cannabis-100 text-cannabis-800 text-xs px-2 py-1 rounded">Fatiga</span>
+                            </div>
+                            <a href="#" class="text-pink-accent font-semibold text-sm hover:text-cannabis-800 flex items-center">
+                                Ver detalles <i class="fas fa-chevron-right ml-2 text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="indicas" style="display: none;">
+                    <!-- Indicas content would go here -->
+                </div>
+                
+                <div class="tab-content" id="hibridas" style="display: none;">
+                    <!-- Híbridas content would go here -->
+                </div>
+                
+                <div class="tab-content" id="alto-cbd" style="display: none;">
+                    <!-- Alto CBD content would go here -->
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <a href="#" class="inline-block bg-cannabis-800 hover:bg-pink-accent text-white px-6 py-3 rounded-lg font-semibold transition">
+                    <i class="fas fa-seedling mr-2"></i> Explorar todas las cepas
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Medical Benefits Section -->
+    <section id="beneficios" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4 text-cannabis-800">Beneficios Médicos y Terapéuticos</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Aplicaciones clínicas respaldadas por evidencia científica.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Benefit 1 -->
+                <div class="bg-white rounded-xl p-8 card-hover">
+                    <div class="text-cannabis-600 text-4xl mb-4">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-cannabis-800">Epilepsia refractaria</h3>
+                    <p class="text-gray-600 mb-4">El CBD ha demostrado eficacia en reducir la frecuencia de convulsiones en síndromes como Dravet y Lennox-Gastaut.</p>
+                    <div class="flex items-center text-sm text-gray-500">
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        <i class="fas fa-star-half-alt text-yellow-400 mr-2"></i>
+                        <span>Evidencia sólida</span>
+                    </div>
+                </div>
+                
+                <!-- Benefit 2 -->
+                <div class="bg-white rounded-xl p-8 card-hover">
+                    <div class="text-cannabis-600 text-4xl mb-4">
+                        <i class="fas fa-pain"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-cannabis-800">Dolor crónico</h3>
+                    <p class="text-gray-600 mb-4">Los cannabinoides pueden ser efectivos para el manejo del dolor neuropático y crónico, especialmente cuando otros tratamientos fallan.</p>
+                    <div class="flex items-center text-sm text-gray-500">
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        <i class="far fa-star text-yellow-400 mr-2"></i>
+                        <span>Buena evidencia</span>
+                    </div>
+                </div>
+                
+                <!-- Benefit 3 -->
+                <div class="bg-white rounded-xl p-8 card-hover">
+                    <div class="text-cannabis-600 text-4xl mb-4">
+                        <i class="fas fa-vomit"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-cannabis-800">Náuseas por quimioterapia</h3>
+                    <p class="text-gray-600 mb-4">El THC ha mostrado ser efectivo en el control de náuseas y vómitos inducidos por quimioterapia, mejorando la calidad de vida de pacientes oncológicos.</p>
+                    <div class="flex items-center text-sm text-gray-500">
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 mr-2"></i>
+                        <span>Evidencia muy sólida</span>
+                    </div>
+                </div>
+                
+                <!-- Benefit 4 -->
+                <div class="bg-white rounded-xl p-8 card-hover">
+                    <div class="text-cannabis-600 text-4xl mb-4">
+                        <i class="fas fa-bed"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-cannabis-800">Trastornos del sueño</h3>
+                    <p class="text-gray-600 mb-4">Algunas variedades con alto contenido de CBN y mirceno pueden ayudar a conciliar el sueño y mejorar su calidad en ciertos pacientes.</p>
+                    <div class="flex items-center text-sm text-gray-500">
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        <i class="far fa-star text-yellow-400 mr-1"></i>
+                        <i class="far fa-star text-yellow-400 mr-2"></i>
+                        <span>Evidencia moderada</span>
+                    </div>
+                </div>
+                
+                <!-- Benefit 5 -->
+                <div class="bg-white rounded-xl p-8 card-hover">
+                    <div class="text-cannabis-600 text-4xl mb-4">
+                        <i class="fas fa-anxiety"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-cannabis-800">Ansiedad y estrés</h3>
+                    <p class="text-gray-600 mb-4">Dosis bajas de CBD pueden tener efectos ansiolíticos, aunque dosis altas de THC podrían tener el efecto contrario en algunos individuos.</p>
+                    <div class="flex items-center text-sm text-gray-500">
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        <i class="far fa-star text-yellow-400 mr-1"></i>
+                        <i class="far fa-star text-yellow-400 mr-2"></i>
+                        <span>Evidencia moderada</span>
+                    </div>
+                </div>
+                
+                <!-- Benefit 6 -->
+                <div class="bg-white rounded-xl p-8 card-hover">
+                    <div class="text-cannabis-600 text-4xl mb-4">
+                        <i class="fas fa-apple-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-cannabis-800">Esclerosis múltiple</h3>
+                    <p class="text-gray-600 mb-4">Combinaciones de THC:CBD han demostrado eficacia en reducir la espasticidad y el dolor asociado a la esclerosis múltiple.</p>
+                    <div class="flex items-center text-sm text-gray-500">
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        <i class="far fa-star text-yellow-400 mr-2"></i>
+                        <span>Buena evidencia</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 bg-cannabis-100 rounded-xl p-8 md:p-12 text-center relative overflow-hidden">
+                <div class="absolute -right-20 -top-20 w-40 h-40 bg-pink-accent rounded-full opacity-20"></div>
+                <div class="absolute -left-10 -bottom-10 w-60 h-60 bg-cannabis-200 rounded-full opacity-20"></div>
+                <div class="relative z-10">
+                    <h3 class="text-2xl font-bold mb-4 text-cannabis-800">¿Buscas información sobre un uso terapéutico específico?</h3>
+                    <p class="text-gray-700 mb-6 max-w-2xl mx-auto">Nuestro equipo médico puede orientarte sobre las aplicaciones del cannabis para tu condición particular.</p>
+                    <a href="#contacto" class="inline-block bg-cannabis-800 hover:bg-pink-accent text-white px-6 py-3 rounded-lg font-semibold transition pulse-animation">
+                        <i class="fas fa-user-md mr-2"></i> Consultar con especialista
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Side Effects Section -->
+    <section id="efectos" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4 text-cannabis-800">Efectos Secundarios y Precauciones</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Información importante sobre riesgos y consideraciones de seguridad.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <!-- Common Side Effects -->
+                <div class="bg-cannabis-50 rounded-xl p-8">
+                    <h3 class="text-xl font-bold mb-4 text-cannabis-800">Efectos secundarios comunes</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="bg-cannabis-100 text-cannabis-800 rounded-lg p-2 mr-4">
+                                <i class="fas fa-heartbeat"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Taquicardia</h4>
+                                <p class="text-gray-600 text-sm">Aumento temporal del ritmo cardíaco, especialmente con alto THC.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-cannabis-100 text-cannabis-800 rounded-lg p-2 mr-4">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Ojos rojos</h4>
+                                <p class="text-gray-600 text-sm">Vasodilatación ocular causada por el THC.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-cannabis-100 text-cannabis-800 rounded-lg p-2 mr-4">
+                                <i class="fas fa-utensils"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Aumento de apetito</h4>
+                                <p class="text-gray-600 text-sm">Conocido como "munchies", efecto común del THC.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-cannabis-100 text-cannabis-800 rounded-lg p-2 mr-4">
+                                <i class="fas fa-tired"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Sedación</h4>
+                                <p class="text-gray-600 text-sm">Especialmente con variedades índicas o alto CBN.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Precautions -->
+                <div class="bg-cannabis-50 rounded-xl p-8">
+                    <h3 class="text-xl font-bold mb-4 text-cannabis-800">Precauciones importantes</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="bg-cannabis-100 text-cannabis-800 rounded-lg p-2 mr-4">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Desarrollo cerebral</h4>
+                                <p class="text-gray-600 text-sm">Evitar consumo en adolescentes por posible impacto en desarrollo cerebral.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-cannabis-100 text-cannabis-800 rounded-lg p-2 mr-4">
+                                <i class="fas fa-baby"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Embarazo y lactancia</h4>
+                                <p class="text-gray-600 text-sm">No recomendado por posibles efectos en el feto y recién nacido.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-cannabis-100 text-cannabis-800 rounded-lg p-2 mr-4">
+                                <i class="fas fa-car-crash"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Conducir</h4>
+                                <p class="text-gray-600 text-sm">Evitar conducir bajo los efectos del cannabis por alteración de reflejos.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-cannabis-100 text-cannabis-800 rounded-lg p-2 mr-4">
+                                <i class="fas fa-pills"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Interacciones farmacológicas</h4>
+                                <p class="text-gray-600 text-sm">Consultar con médico por posibles interacciones con otros medicamentos.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-red-50 rounded-xl p-8 border border-red-200">
+                <h3 class="text-xl font-bold mb-4 text-red-800 flex items-center">
+                    <i class="fas fa-exclamation-triangle mr-2"></i> Riesgos graves
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-2">Síndrome de hiperémesis cannabinoide</h4>
+                        <p class="text-gray-600 text-sm">Condición rara pero grave que causa náuseas y vómitos cíclicos en consumidores crónicos.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-2">Psicosis inducida</h4>
+                        <p class="text-gray-600 text-sm">El THC en dosis altas puede desencadenar episodios psicóticos en personas predispuestas.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-2">Dependencia</h4>
+                        <p class="text-gray-600 text-sm">Aunque menor que otras sustancias, el uso crónico puede generar dependencia en algunos usuarios.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-2">Problemas pulmonares</h4>
+                        <p class="text-gray-600 text-sm">Fumar cannabis puede irritar las vías respiratorias, considerar métodos alternativos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section id="estadisticas" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4 text-cannabis-800">Estadísticas y Datos</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Cifras relevantes sobre el uso y percepción del cannabis en Chile y el mundo.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <!-- Chile Stats -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="bg-cannabis-800 text-white px-6 py-4">
+                        <h3 class="text-xl font-bold">Chile en cifras</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-6">
+                            <h4 class="font-bold text-cannabis-800 mb-2">Consumo en adultos</h4>
+                            <div class="bg-gray-100 rounded-lg h-6 mb-2">
+                                <div class="bg-cannabis-600 rounded-lg h-6 text-xs text-white flex items-center justify-end pr-2" style="width: 18%">18%</div>
+                            </div>
+                            <p class="text-sm text-gray-600">Prevalencia anual de consumo en población adulta (18-65 años).</p>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-bold text-cannabis-800 mb-2">Uso medicinal</h4>
+                            <div class="bg-gray-100 rounded-lg h-6 mb-2">
+                                <div class="bg-cannabis-600 rounded-lg h-6 text-xs text-white flex items-center justify-end pr-2" style="width: 7%">7%</div>
+                            </div>
+                            <p class="text-sm text-gray-600">De los consumidores reportan uso exclusivamente medicinal.</p>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-bold text-cannabis-800 mb-2">Percepción de riesgo</h4>
+                            <div class="bg-gray-100 rounded-lg h-6 mb-2">
+                                <div class="bg-cannabis-600 rounded-lg h-6 text-xs text-white flex items-center justify-end pr-2" style="width: 32%">32%</div>
+                            </div>
+                            <p class="text-sm text-gray-600">De la población considera que el consumo frecuente implica gran riesgo.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Global Comparison -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="bg-cannabis-800 text-white px-6 py-4">
+                        <h3 class="text-xl font-bold">Comparación global</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-6">
+                            <h4 class="font-bold text-cannabis-800 mb-2">Países con mayor prevalencia</h4>
+                            <div class="space-y-3">
+                                <div>
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-sm font-medium text-gray-700">Israel</span>
+                                        <span class="text-sm font-medium text-gray-700">27%</span>
+                                    </div>
+                                    <div class="bg-gray-200 rounded-full h-2.5">
+                                        <div class="bg-cannabis-600 h-2.5 rounded-full" style="width: 27%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-sm font-medium text-gray-700">EE.UU.</span>
+                                        <span class="text-sm font-medium text-gray-700">22%</span>
+                                    </div>
+                                    <div class="bg-gray-200 rounded-full h-2.5">
+                                        <div class="bg-cannabis-600 h-2.5 rounded-full" style="width: 22%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-sm font-medium text-gray-700">Canadá</span>
+                                        <span class="text-sm font-medium text-gray-700">21%</span>
+                                    </div>
+                                   
+</html>
